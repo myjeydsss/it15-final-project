@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+
 import { Route, Routes } from 'react-router-dom';
 import HomePage from './components/HomePage';
 import About from './components/About';
@@ -7,12 +7,9 @@ import Features from './components/Features';
 import LoginUser from './components/LoginUser';
 import RegisterUser from './components/RegisterUser';
 import AdminRegister from './components/AdminRegister';
-import AdminDashboard from './components/AdminDashboard';
-import AdminLogin from './components/AdminLogin';
-import Bloggers from './components/Bloggers';
-import Posts from './components/Posts';
 
-const App: React.FC = () => {
+
+const App = () => {
 
 
   return (
