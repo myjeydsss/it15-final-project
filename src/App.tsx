@@ -9,13 +9,11 @@ import RegisterUser from './components/RegisterUser';
 import AdminRegister from './components/AdminRegister';
 import AdminDashboard from './components/AdminDashboard';
 import AdminLogin from './components/AdminLogin';
-import Bloggers from './components/Bloggers';
-import Posts from './components/Posts';
 
 interface Token {
   user: {
     email: string;
-    
+    // Add other properties if needed
   };
   // Add other token properties if needed
 }
@@ -41,11 +39,6 @@ const App: React.FC = () => {
   return (
     <>
       <Routes>
-      {token && <Route path="/Bloggers" element={<Bloggers token={token} setToken={setToken} />} />}
-
-      {token && <Route path="/Posts" element={<Posts token={token} setToken={setToken} />} />}
-
-
         <Route path='/' element={<HomePage />} />
         <Route path='/Home' element={<HomePage />} />
         <Route path='/About' element={<About />} />
@@ -56,8 +49,6 @@ const App: React.FC = () => {
         <Route path="/RegisterAdmin" element={<AdminRegister />} />
         <Route path="/LoginAdmin" element={<AdminLogin setToken={setToken} />} />
         {token && <Route path="/AdminDashboard" element={<AdminDashboard token={token} setToken={setToken} />} />}
-
-
       </Routes>
     </>
   );
