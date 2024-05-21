@@ -61,7 +61,7 @@ const HomePage = () => {
           <div className="row">
             <div className="col-md-12">
               <div className="block text-center">
-                <span className="text-white">Home Page</span>
+                <span className="text-white">Try test</span>
                 <h1 className="text-capitalize mb-5 text-lg">Home Page</h1>
               </div>
             </div>
