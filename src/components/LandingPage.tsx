@@ -4,7 +4,7 @@ import { useLocation } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import './css/homepage.css';
 
-const HomePage: React.FC = () => {
+const LandingPage: React.FC = () => {
   const location = useLocation();
 
   return (
@@ -177,4 +177,4 @@ const HomePage: React.FC = () => {
   );
 }
 
-export default HomePage;
+export default LandingPage;

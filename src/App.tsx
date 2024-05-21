@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import HomePage from './components/HomePage';
 import About from './components/About';
 import Contact from './components/Contact';
 import Features from './components/Features';
@@ -16,6 +15,7 @@ import AdminLogin from './components/AdminLogin';
 import MyBlogs from './components/MyBlogs';
 import BloggerProfile from './components/BloggerProfile';
 import EditProfile from './components/EditProfile';
+import LandingPage from './components/LandingPage';
 
 interface Token {
   user: {
@@ -47,8 +47,7 @@ const App: React.FC = () => {
     <>
       <Routes>
 
-      <Route path='/' element={<HomePage />} />
-        <Route path='/Home' element={<HomePage />} />
+        <Route path='/Home' element={<LandingPage />} />
         <Route path='/About' element={<About />} />
         <Route path='/Contact' element={<Contact />} />
         <Route path='/Features' element={<Features />} />
