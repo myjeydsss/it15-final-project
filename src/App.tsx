@@ -8,11 +8,11 @@ import LoginUser from './components/LoginUser';
 import RegisterUser from './components/RegisterUser';
 import AdminRegister from './components/AdminRegister';
 import AdminDashboard from './components/AdminDashboard';
-import AdminLogin from './components/AdminLogin';
 import Bloggers from './components/Bloggers';
 import Posts from './components/Posts';
 import Category from './components/Category';
 import BloggerDashboard from './components/BloggerDashboard';
+import AdminLogin from './components/AdminLogin';
 
 interface Token {
   user: {
