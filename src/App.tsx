@@ -11,6 +11,7 @@ import AdminDashboard from './components/AdminDashboard';
 import AdminLogin from './components/AdminLogin';
 import Bloggers from './components/Bloggers';
 import Posts from './components/Posts';
+import Category from './components/Category';
 
 interface Token {
   user: {
@@ -41,9 +42,12 @@ const App: React.FC = () => {
   return (
     <>
       <Routes>
+      {token && <Route path="/AdminDashboard" element={<AdminDashboard token={token} setToken={setToken} />} />}
       {token && <Route path="/Bloggers" element={<Bloggers token={token} setToken={setToken} />} />}
-
       {token && <Route path="/Posts" element={<Posts token={token} setToken={setToken} />} />}
+      {token && <Route path="/Category" element={<Category token={token} setToken={setToken} />} />}
+
+
 
 
         <Route path='/' element={<HomePage />} />
@@ -55,7 +59,6 @@ const App: React.FC = () => {
         <Route path='/LoginUser' element={<LoginUser />} />
         <Route path="/RegisterAdmin" element={<AdminRegister />} />
         <Route path="/LoginAdmin" element={<AdminLogin setToken={setToken} />} />
-        {token && <Route path="/AdminDashboard" element={<AdminDashboard token={token} setToken={setToken} />} />}
 
 
       </Routes>

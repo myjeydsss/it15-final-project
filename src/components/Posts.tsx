@@ -59,6 +59,14 @@ const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
                 >
                   Posts
                 </NavLink>
+                <NavLink
+                  to="/Category"
+                  className={`nav-link mx-2 ${
+                    location.pathname === "/Category" ? "active" : ""
+                  }`}
+                >
+                  Category
+                </NavLink>
                
               
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
@@ -72,7 +80,7 @@ const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
           <div className="row">
             <div className="col-md-12">
               <div className="block text-center">
-              <h1 className="text-capitalize mb-5 text-lg">Posts</h1>
+              <h1 className="text-capitalize mb-5 text-lg">Posted Blog</h1>
                 <h1 className="text-capitalize mb-5 text-lg">Welcome, {token.user.email}!</h1>
               </div>
             </div>

@@ -59,6 +59,14 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
                 >
                   Posts
                 </NavLink>
+                <NavLink
+                  to="/Category"
+                  className={`nav-link mx-2 ${
+                    location.pathname === "/Category" ? "active" : ""
+                  }`}
+                >
+                  Category
+                </NavLink>
                
               
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
