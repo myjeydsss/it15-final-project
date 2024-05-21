@@ -1,6 +1,6 @@
 import React from 'react';
 import { Navbar, Container, Nav } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 
 interface Token {
   user: {
@@ -31,10 +31,36 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ token, setToken }) => {
     <>
       <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
-          <Navbar.Brand href="#">Admin Dashboard</Navbar.Brand>
+          <Navbar.Brand href="#">Welcome, {token.user.email}!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+            <NavLink
+                  to="/AdminDashboard"
+                  className={`nav-link mx-2 ${
+                    location.pathname === "/AdminDashboard" ? "active" : ""
+                  }`}
+                >
+                  Dashboard
+                </NavLink>
+            <NavLink
+                  to="/Bloggers"
+                  className={`nav-link mx-2 ${
+                    location.pathname === "/Bloggers" ? "active" : ""
+                  }`}
+                >
+                  Bloggers
+                </NavLink>
+                <NavLink
+                  to="/Posts"
+                  className={`nav-link mx-2 ${
+                    location.pathname === "/Posts" ? "active" : ""
+                  }`}
+                >
+                  Posts
+                </NavLink>
+               
+              
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -46,7 +72,8 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ token, setToken }) => {
           <div className="row">
             <div className="col-md-12">
               <div className="block text-center">
-                <span className="text-white">Admin Dashboard</span>
+              <h1 className="text-capitalize mb-5 text-lg">Dashboard</h1>
+
                 <h1 className="text-capitalize mb-5 text-lg">Welcome, {token.user.email}!</h1>
               </div>
             </div>
