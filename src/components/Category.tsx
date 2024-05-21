@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Container, Nav, NavLink, Navbar } from 'react-bootstrap';
+import { Container, Nav, NavLink, Navbar, Button, Modal, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 interface Category {
   category_id: number;
@@ -25,6 +27,9 @@ interface CategoryProps {
 const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategoryName, setNewCategoryName] = useState('');
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editCategoryName, setEditCategoryName] = useState('');
+  const [selectedCategoryId, setSelectedCategoryId] = useState<number | null>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -57,8 +62,45 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
       setNewCategoryName('');
       fetchCategories(); // Fetch categories again to ensure data is up-to-date
     }
+  };
 
-    window.location.reload()
+  const handleDeleteCategory = async (category_id: number) => {
+    const { error } = await supabase
+      .from('category')
+      .delete()
+      .eq('category_id', category_id);
+
+    if (error) {
+      console.log('Error deleting category:', error);
+    } else {
+      setCategories((prevCategories) => prevCategories.filter(category => category.category_id !== category_id));
+    }
+  };
+
+  const handleEditCategory = async () => {
+    if (editCategoryName.trim() === '' || selectedCategoryId === null) {
+      alert('Category name cannot be empty');
+      return;
+    }
+
+    const { data, error } = await supabase
+      .from('category')
+      .update({ category_name: editCategoryName })
+      .eq('category_id', selectedCategoryId);
+
+    if (error) {
+      console.log('Error updating category:', error);
+    } else if (data) {
+      setCategories((prevCategories) =>
+        prevCategories.map((category) =>
+          category.category_id === selectedCategoryId ? { ...category, category_name: editCategoryName } : category
+        )
+      );
+      setShowEditModal(false);
+      setEditCategoryName('');
+      setSelectedCategoryId(null);
+    }
+    window.location.reload();
   };
 
   const handleLogout = () => {
@@ -68,6 +110,12 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
     setToken(null);
     // Redirect to the admin login page
     navigate('/LoginAdmin');
+  };
+
+  const openEditModal = (category: Category) => {
+    setEditCategoryName(category.category_name);
+    setSelectedCategoryId(category.category_id);
+    setShowEditModal(true);
   };
 
   return (
@@ -122,6 +170,7 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
             <tr>
               <th>Category ID</th>
               <th>Category Name</th>
+              <th>Actions</th>
             </tr>
           </thead>
           <tbody>
@@ -129,6 +178,22 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
               <tr key={category.category_id}>
                 <td>{category.category_id}</td>
                 <td>{category.category_name}</td>
+                <td>
+                  <button
+                    className="btn btn-primary me-2"
+                    onClick={() => openEditModal(category)}
+                  >
+                    <FontAwesomeIcon icon={faEdit} />
+                    &nbsp; Edit
+                  </button>
+                  <button
+                    className="btn btn-danger"
+                    onClick={() => handleDeleteCategory(category.category_id)}
+                  >
+                    <FontAwesomeIcon icon={faTrash} />
+                    &nbsp; Delete
+                  </button>
+                </td>
               </tr>
             ))}
           </tbody>
@@ -146,6 +211,32 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
           </button>
         </div>
       </div>
+
+      <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Category</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <Form>
+            <Form.Group controlId="formCategoryName">
+              <Form.Label>Category Name</Form.Label>
+              <Form.Control
+                type="text"
+                value={editCategoryName}
+                onChange={(e) => setEditCategoryName(e.target.value)}
+              />
+            </Form.Group>
+          </Form>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleEditCategory}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </>
   );
 };

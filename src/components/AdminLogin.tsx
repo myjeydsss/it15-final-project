@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-import { supabase } from '../supabaseClient';
+import { Navbar, Container, Nav, Card, Form, Button } from 'react-bootstrap';
 import { Link, useNavigate } from 'react-router-dom';
+import { supabase } from '../supabaseClient';
 
 interface Props {
   setToken: (token: any) => void;
@@ -50,25 +51,43 @@ const AdminLogin: React.FC<Props> = ({ setToken }) => {
   }
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          placeholder='Email'
-          name='email'
-          type='email'
-          onChange={handleChange}
-        />
-        <input
-          placeholder='Password'
-          name='password'
-          type='password'
-          onChange={handleChange}
-        />
-
-        <button type='submit'>Submit</button>
-      </form>
-      Dont have an account?<Link to={'/RegisterAdmin'}>Register</Link>
-    </div>
+    <>
+   
+      <div className="container d-flex justify-content-center align-items-center mt-5">
+        <Card className="p-4">
+          <Card.Body>
+            <Form onSubmit={handleSubmit}>
+              <Form.Group controlId="formEmail">
+                <Form.Label>Email</Form.Label>
+                <Form.Control
+                  type="email"
+                  placeholder="Enter email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Form.Group controlId="formPassword">
+                <Form.Label>Password</Form.Label>
+                <Form.Control
+                  type="password"
+                  placeholder="Password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                />
+              </Form.Group>
+              <Button variant="primary" type="submit">
+                Submit
+              </Button>
+            </Form>
+            <div className="mt-3">
+              Don't have an account? <Link to={'/RegisterAdmin'}>Register</Link>
+            </div>
+          </Card.Body>
+        </Card>
+      </div>
+    </>
   );
 };
 
