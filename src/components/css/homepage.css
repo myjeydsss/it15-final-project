@@ -1,0 +1,367 @@
+/* homepage.css */
+
+/* General styles */
+body {
+    font-family: 'Inter';
+  }
+  
+  header {
+    margin-bottom: 30px;
+  }
+  
+  
+  .section1 {
+    background-color: #FFFFFF; /* bg-white-100 */
+    padding-top: 20px;         /* py-20 */
+    padding-bottom: 20px;      /* py-20 */
+  }
+  .con1 {
+    max-width: 1200px; /* Limit content width */
+    margin-left: auto; /* Center content horizontally */
+    margin-right: auto; /* Center content horizontally */
+    text-align: center; /* Center align text */
+  }
+  .heading2Explore {
+    font-size: 3rem;       /* text-5xl: Set font size to 5xl */
+    font-weight: bold;     /* font-bold: Set font weight to bold */
+    margin-bottom: 1rem;   /* mb-4: Set margin bottom */
+  }
+  .pDiscover {
+    font-size: 1.25rem;   /* text-xl */
+    color: black;          /* text-black */
+    margin-bottom: 2rem;   /* mb-8 */
+  }
+  .pAuthor {
+    font-size: 1.25rem;   /* text-xl */
+    color: black;          /* text-black */
+    font-weight: bold;     /* font-bold */
+  }
+  
+  
+  .text1{
+    color: #3C5B6F;
+  }
+  .text2{
+    color: #FFC470;
+  }
+  .button1 {
+    padding-left: 2rem;   /* px-8 */
+    padding-right: 2rem;  /* px-8 */
+    padding-top: 1rem;    /* py-4 */
+    padding-bottom: 1rem; /* py-4 */
+    background-color: #3C5B6F; /* bg-primary */
+    color: white;         /* text-white */
+    font-weight: bold;    /* font-bold */
+    border-radius: 0.25rem; /* rounded */
+    cursor: pointer;      /* cursor-pointer */
+  }
+  .image1 {
+    margin-left: auto;    /* mx-auto */
+    margin-right: auto;   /* mx-auto */
+    text-align: center;   /* text-center */
+    margin-top: 5rem;     /* my-20 */
+    margin-bottom: 5rem;  /* my-20 */
+  }
+  .container {
+    max-width: 6xl;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 8rem;
+    margin-bottom: 8rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .quote {
+    font-size: 3rem;
+    line-height: 1.35;
+    font-weight: bold;
+    color: black;
+  }
+  .author {
+    text-align: right;
+    font-size: 1.25rem;
+    font-weight: bold;
+    color: black;
+  }
+  .link {
+    text-align: center;
+    margin-top: 2.5rem;
+    margin-bottom: 5rem;
+  }
+  .cta-link {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #3C5B6F;
+  }
+  
+  .section2{
+    background-color: #3C5B6F; /* bg-[#3C5B6F] */
+    padding-top: 5rem;        /* py-20 */
+    padding-bottom: 5rem;     /* py-20 */
+  }
+  .container2 {
+    max-width: 6xl;
+    margin-left: 70px;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+  }
+  @media (min-width: 768px) {
+    .container2 {
+      flex-direction: row;
+    }
+  }
+  .heading2 {
+    font-size: 3rem;     /* text-5xl */
+    font-weight: bold;   /* font-bold */
+    color: white;        /* text-white */
+    margin-bottom: 1rem; /* mb-4 */
+  }
+  .paragraph2 {
+    font-size: 1.25rem;   /* text-xl */
+    color: white;         /* text-white */
+    margin-bottom: 1.25rem; /* mb-5 */
+  }
+  .paragraph3 {
+    font-size: 1.25rem;   /* text-xl */
+    color: white;          /* text-white */
+    margin-bottom: 2.5rem; /* mb-10 */
+  }
+  .div1 {
+    width: 100%;            /* This ensures the element takes full width */
+  }
+  @media (min-width: 768px) {
+    .div1 {
+      width: 50%;            /* md:w-1/2: Sets width to half on medium screens and above */
+      padding-left: 1rem;    /* md:pl-8: Adds padding-left on medium screens and above */
+    }
+  }
+  .div1 {
+    padding-left: 1rem;      /* px-4: Adds padding-left */
+  }
+  .link-free {
+    font-size: 1.5rem;       /* text-2xl: Set font size to 2xl */
+    color: #FFC470;          /* text-[#FFC470]: Set text color */
+    margin-bottom: 1.25rem;  /* mb-5: Set margin bottom */
+  }
+  .img1 {
+    width: 90%;            /* w-full: Set width to full */
+    border-radius: 0.5rem;  /* rounded-lg: Apply rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* shadow-lg: Apply shadow */
+  }
+  .img2 {
+    max-width: 6xl;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 5rem; /* my-20 */
+  }
+  
+  .thirdSection {
+    text-align: center; /* Center align text */
+    margin-top: 5rem; /* Adjusted margin top */
+    margin-bottom: 7rem;
+  }
+  .paragraphDate {
+    font-size: 1rem;   /* text-xl */
+    color: black;          /* text-black */
+    margin-bottom: 2rem;   /* mb-8 */
+  }
+  .divJoin {
+    max-width: 1200px; /* Limit content width */
+    margin-left: auto; /* Center content horizontally */
+    margin-right: auto; /* Center content horizontally */
+    text-align: center; /* Center align text */
+  }
+  
+  .fourthSection {
+    background-color: #3C5B6F; /* bg-[#3C5B6F] */
+    padding-top: 5rem;        /* py-20 */
+    padding-bottom: 3rem;     /* py-20 */
+  }
+  .svg-row {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center; /* Center horizontally */
+  }
+  .svg-item {
+    width: 30px;
+    height:30px;
+    margin-right: 10px; /* Adjust spacing between SVGs */
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+  }
+  .link-link {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    margin-top: 1rem;
+    text-align: center; /* Center align text */
+  }
+  .link-logo{
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; 
+  }
+  .logo{
+    width: 200px;
+    height: 200px;
+  }
+  .reserved {
+    font-size: 1rem;   /* text-xl */
+    color: rgb(255, 255, 255); 
+    text-align: center;       
+  }
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  /* Section Styles */
+  .bg-white-100 {
+    background-color: #f8f9fa;
+  }
+  
+  .py-20 {
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+  }
+  
+  .text-center {
+    text-align: center;
+  }
+  
+  .text-5xl {
+    font-size: 3rem;
+  }
+  
+  .font-bold {
+    font-weight: bold;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  
+  .text-secondary {
+    color: var(--color-secondary);
+  }
+  
+  .text-xl {
+    font-size: 1.25rem;
+  }
+  
+  .mb-8 {
+    margin-bottom: 2rem;
+  }
+  
+  /* Button Styles */
+  .px-8 {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+  
+  .py-4 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  
+  .text-white {
+    color: white;
+  }
+  
+  .rounded {
+    border-radius: 0.25rem;
+  }
+  
+  .cursor-pointer {
+    cursor: pointer;
+  }
+  
+  /* Image Styles */
+  .my-20 {
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+  }
+  
+  .mx-auto {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .rounded-lg {
+    border-radius: 0.5rem;
+  }
+  
+  .shadow-lg {
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Quote Styles */
+  .max-w-6xl {
+    max-width: 72rem;
+  }
+  
+  .my-8 {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  
+  .md\:text-5xl {
+    font-size: 3rem; /* Adjust as needed for medium screens */
+  }
+  
+  .font-hdg {
+    font-family: 'Inter', sans-serif; /* Adjust as needed */
+  }
+  
+  .text-right {
+    text-align: right;
+  }
+  
+  .my-10 {
+    margin-top: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+  
+  .text-2xl {
+    font-size: 1.5rem;
+  }
+  
+  .mb-4 {
+    margin-bottom: 1rem;
+  }
+  
+  .text-primary {
+    color: var(--color-primary);
+  }
+  

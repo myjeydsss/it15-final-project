@@ -1,12 +1,40 @@
+import { useEffect, useState } from "react";
 import { Navbar, Container, Nav } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 
-const MyBlogs = () => {
+// Define a type for the user object
+interface User {
+    id: string;
+    firstname: string;
+    lastname: string;
+    email: string;
+    username: string;
+    password: string;
+  }
+  
+  const MyBlogs = () => {
+    const [user, setUser] = useState<User | null>(null);
+  
+    useEffect(() => {
+      const userData = localStorage.getItem('user');
+      if (userData) {
+        setUser(JSON.parse(userData));
+      }
+    }, []);
+
+    const handleLogout = () => {
+        localStorage.removeItem('user');
+        window.location.href = '/Home';
+      };
+
+
   return (
     <>
     <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
-          <Navbar.Brand href="#">Welcome!</Navbar.Brand>
+          <Navbar.Brand href="#">
+            Welcome{user ? `, ${user.firstname} ${user.lastname}` : '!'}
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -36,7 +64,7 @@ const MyBlogs = () => {
                 </NavLink>
                 
               
-              <Nav.Link >Logout</Nav.Link>
+                <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>

@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import { supabase } from '../supabaseClient';  // Make sure to import your Supabase client
+import { supabase } from '../supabaseClient'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, NavDropdown, Form, Button, Card } from 'react-bootstrap';
 import "bootstrap/dist/css/bootstrap.min.css";
 
-const UserLogin = () => {
+const LoginUser = () => {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
@@ -29,18 +29,15 @@ const UserLogin = () => {
         .eq('username', formData.username)
         .eq('password', formData.password);
 
-    
-
-
       if (error) {
         throw error;
       }
 
       if (data.length > 0) {
-        // Assuming you want to save some form of user state or token
+        const user = data[0];
+        localStorage.setItem('user', JSON.stringify(user));
         alert('Login successful!');
-        // Perform any login actions here, e.g., save token, redirect, etc.
-        navigate('/BloggerDashboard');  // Redirect to Home page after successful login
+        navigate('/BloggerDashboard');
       } else {
         alert('Invalid username or password');
       }
@@ -120,4 +117,4 @@ const UserLogin = () => {
   );
 };
 
-export default UserLogin;
+export default LoginUser;
