@@ -1,7 +1,7 @@
 import { Navbar, Container, Nav } from "react-bootstrap"
 import { NavLink } from "react-router-dom"
 
-const BloggerDashboard = () => {
+const MyBlogs = () => {
   return (
     <>
     <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
@@ -27,9 +27,9 @@ const BloggerDashboard = () => {
                   My Blogs
                 </NavLink>
                 <NavLink
-                  to="/Profile"
+                  to="/BloggerProfile"
                   className={`nav-link mx-2 ${
-                    location.pathname === "/Profile" ? "active" : ""
+                    location.pathname === "/BloggerProfile" ? "active" : ""
                   }`}
                 >
                   Profile
@@ -42,11 +42,11 @@ const BloggerDashboard = () => {
         </Container>
       </Navbar>
       <div>
-        <h4>BloggerDashboard</h4>
+        <h4>MyBlogs</h4>
         </div>
 
     </>
   )
 }
 
-export default BloggerDashboard
+export default MyBlogs

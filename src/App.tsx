@@ -13,6 +13,8 @@ import Posts from './components/Posts';
 import Category from './components/Category';
 import BloggerDashboard from './components/BloggerDashboard';
 import AdminLogin from './components/AdminLogin';
+import MyBlogs from './components/MyBlogs';
+import BloggerProfile from './components/BloggerProfile';
 
 interface Token {
   user: {
@@ -43,24 +45,30 @@ const App: React.FC = () => {
   return (
     <>
       <Routes>
-        {token && <Route path="/AdminDashboard" element={<AdminDashboard token={token} setToken={setToken} />} />}
-        {token && <Route path="/Bloggers" element={<Bloggers token={token} setToken={setToken} />} />}
-        {token && <Route path="/Posts" element={<Posts token={token} setToken={setToken} />} />}
-        {token && <Route path="/Category" element={<Category token={token} setToken={setToken} />} />}
 
-        <Route path='/BloggerDashboard' element={<BloggerDashboard />} />
-
-
-
-        <Route path='/' element={<HomePage />} />
+      <Route path='/' element={<HomePage />} />
         <Route path='/Home' element={<HomePage />} />
         <Route path='/About' element={<About />} />
         <Route path='/Contact' element={<Contact />} />
         <Route path='/Features' element={<Features />} />
         <Route path='/RegisterUser' element={<RegisterUser />} />
         <Route path='/LoginUser' element={<LoginUser />} />
+
+
         <Route path="/RegisterAdmin" element={<AdminRegister />} />
         <Route path="/LoginAdmin" element={<AdminLogin setToken={setToken} />} />
+        {token && <Route path="/AdminDashboard" element={<AdminDashboard token={token} setToken={setToken} />} />}
+        {token && <Route path="/Bloggers" element={<Bloggers token={token} setToken={setToken} />} />}
+        {token && <Route path="/Posts" element={<Posts token={token} setToken={setToken} />} />}
+        {token && <Route path="/Category" element={<Category token={token} setToken={setToken} />} />}
+
+        <Route path='/BloggerDashboard' element={<BloggerDashboard />} />
+        <Route path='/BloggerProfile' element={<BloggerProfile />} />
+        <Route path='/MyBlogs' element={<MyBlogs />} />
+
+
+       
+       
 
 
       </Routes>

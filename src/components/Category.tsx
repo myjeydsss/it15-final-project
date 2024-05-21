@@ -62,6 +62,8 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
       setNewCategoryName('');
       fetchCategories(); // Fetch categories again to ensure data is up-to-date
     }
+    window.location.reload();
+
   };
 
   const handleDeleteCategory = async (category_id: number) => {
