@@ -1,8 +1,15 @@
+// Import necessary components and CSS
 import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { Button, Container, Card, Nav, NavLink, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import './css/BloggerProfile.css';
+import Swal from "sweetalert2";
 
+
+const CDNURL = "https://fnuxlkuyfgyjiomkzksy.supabase.co/storage/v1/object/public/profile_image/";
+
+// Interface for User object
 interface User {
   id: string;
   firstname: string;
@@ -10,13 +17,15 @@ interface User {
   email: string;
   username: string;
   password: string;
-  profile_image?: string; // Add profile_image property
+  profile_image: string; 
 }
 
+// BloggerProfile component
 const BloggerProfile = () => {
-  const [user, setUser] = useState<User | null>(null);
-  const navigate = useNavigate();
+  const [user, setUser] = useState<User | null>(null); // State for user data
+  const navigate = useNavigate(); // Function for navigation
 
+  // Fetch user data from localStorage on component mount
   useEffect(() => {
     const userData = localStorage.getItem('user');
     if (userData) {
@@ -24,11 +33,13 @@ const BloggerProfile = () => {
     }
   }, []);
 
+  // Logout functionality
   const handleLogout = () => {
     localStorage.removeItem('user');
     window.location.href = '/Home';
   };
 
+  // Delete account functionality
   const handleDelete = async () => {
     try {
       const { error } = await supabase
@@ -41,15 +52,53 @@ const BloggerProfile = () => {
       }
   
       localStorage.removeItem('user');
-      alert('Account deleted successfully!');
       navigate('/Home');
+      
+      // Display success message after successfully deleting the account
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Your account has been successfully deleted!',
+      });
     } catch (error) {
       alert(error);
     }
   };
 
+  // Function to show SweetAlert for delete confirmation
+  const showDeleteAlert = () => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success",
+        cancelButton: "btn btn-danger"
+      },
+      buttonsStyling: false
+    });
+
+    swalWithBootstrapButtons.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        handleDelete();
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        swalWithBootstrapButtons.fire({
+          title: "Cancelled",
+          text: "Your account is safe :)",
+          icon: "error"
+        });
+      }
+    });
+  };
+
   return (
     <>
+      {/* Navigation bar */}
       <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
           <Navbar.Brand href="#">
@@ -58,6 +107,7 @@ const BloggerProfile = () => {
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
+              {/* Navigation links */}
               <NavLink
                 href="/BloggerDashboard"
                 className={`nav-link mx-2 ${
@@ -67,12 +117,10 @@ const BloggerProfile = () => {
                 Dashboard
               </NavLink>
               <NavLink
-                href="/MyBlogs"
-                className={`nav-link mx-2 ${
-                  location.pathname === '/MyBlogs' ? 'active' : ''
-                }`}
+                href="/CreateBlog"
+                className={`nav-link mx-2 ${location.pathname === '/CreateBlog' ? 'active' : ''}`}
               >
-                My Blogs
+                Create Blog
               </NavLink>
               <NavLink
                 href="/BloggerProfile"
@@ -82,24 +130,32 @@ const BloggerProfile = () => {
               >
                 Profile
               </NavLink>
+              {/* Logout button */}
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
+      {/* Main content */}
       <Container className="d-flex justify-content-center align-items-center mt-5">
         <Card className="p-4">
           <Card.Body>
             <h5 className="card-title">Profile</h5>
+            {/* Check if user data exists */}
             {user ? (
               <div>
+                {/* Display profile image in circular format */}
                 {user.profile_image && (
-                  <img src={user.profile_image} alt="Profile" style={{ width: '100px', height: '100px' }} />
+                  <div className="avatar-container">
+                    <img src={CDNURL + user.profile_image} alt="Profile" className="avatar-image" />
+                  </div>
                 )}
+                {/* Display user information */}
                 <p><strong>Firstname:</strong> {user.firstname}</p>
                 <p><strong>Lastname:</strong> {user.lastname}</p>
                 <p><strong>Email:</strong> {user.email}</p>
                 <p><strong>Username:</strong> {user.username}</p>
+                {/* Edit Profile button */}
                 <Button variant="primary" onClick={() => navigate('/EditProfile')}>
                   Edit Profile
                 </Button>
@@ -107,7 +163,8 @@ const BloggerProfile = () => {
             ) : (
               <p>Loading...</p>
             )}
-            <Button variant="danger" className="mt-3" onClick={handleDelete}>
+            {/* Delete Account button */}
+            <Button variant="danger" className="mt-3" onClick={showDeleteAlert}>
               Delete Account
             </Button>
           </Card.Body>
@@ -115,7 +172,6 @@ const BloggerProfile = () => {
       </Container>
     </>
   );
-
 };
 
 export default BloggerProfile;

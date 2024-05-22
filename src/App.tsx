@@ -16,6 +16,8 @@ import MyBlogs from './components/MyBlogs';
 import BloggerProfile from './components/BloggerProfile';
 import EditProfile from './components/EditProfile';
 import LandingPage from './components/LandingPage';
+import CreateBlog from './components/CreateBlog';
+import EditBlog from './components/EditBlog';
 
 interface Token {
   user: {
@@ -64,8 +66,12 @@ const App: React.FC = () => {
 
         <Route path='/BloggerDashboard' element={<BloggerDashboard />} />
         <Route path='/BloggerProfile' element={<BloggerProfile />} />
-        <Route path='/MyBlogs' element={<MyBlogs />} />
+        <Route path="/MyBlogs/:blog_id" element={<MyBlogs />} />
         <Route path='/EditProfile' element={<EditProfile />} />
+        <Route path='/CreateBlog' element={<CreateBlog />} />
+        <Route path="/EditBlog/:blog_id" element={<EditBlog />} />
+
+
 
 
        

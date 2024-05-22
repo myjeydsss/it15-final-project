@@ -1,0 +1,112 @@
+.image-1 {
+    position: center;
+    width: 60%;
+    height: 50%;
+    object-fit: cover;
+    border-radius: 2rem; 
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+    margin: auto;
+  }
+
+.about-section2{
+    padding-top: 70px;   
+    padding-bottom: 20px;
+  }
+  .container-1 {
+    width: 100%;   
+    display: flex;
+    flex-wrap: wrap;   
+    padding-bottom: 70px;     
+  }
+  .container-2 {
+    width: 88%;   
+    display: flex;
+    flex-wrap: wrap;   
+    padding-bottom: 70px;     
+  }
+  .column-1 {
+    flex: 1;
+    padding-left: 180px;
+  }
+  .heading-3-1 {
+    font-size: 3rem;    
+    font-weight: bold;   
+    color: #3C5B6F;        
+    margin-bottom: 1rem;
+  }
+  .paragraph-1 {
+    line-height: 2;
+    font-size: 1.10rem;
+  }
+  .paragraph-1-2 {
+    font-weight: bold;
+    line-height: 2;
+    font-size: 1.10rem;
+  }
+  .image-2{
+    width: 24rem;
+    height: 27rem;
+    border-radius: 2rem;  
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .heading-3-1-1 {
+    font-size: 3rem;    
+    font-weight: bold;   
+    color: #3C5B6F;   
+    margin-top: 2rem;     
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+  .paragraph-1-1 {
+    font-size: 1.10rem;  
+    color: black;      
+    margin-bottom: 2rem;
+    padding-left: 200px;
+    padding-right: 200px;
+    text-align: center;
+  }
+
+  .fourthSection {
+    background-color: #3C5B6F;
+    padding-top: 5rem;        
+    padding-bottom: 3rem;     
+  }
+  .svg-row {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+  }
+  .svg-item {
+    width: 30px;
+    height:30px;
+    margin-right: 10px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+  .link-link {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .link-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  .logo{
+    width: 200px;
+    height: 200px;
+  }
+  .reserved {
+    font-size: 1rem;  
+    color: rgb(255, 255, 255); 
+    text-align: center;       
+  }
+
+  

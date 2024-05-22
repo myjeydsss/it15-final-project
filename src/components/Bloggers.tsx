@@ -4,6 +4,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import Swal from 'sweetalert2';
 
 interface Token {
   user: {
@@ -56,7 +57,8 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
     const { data, error } = await supabase
       .from('bloggers')
       .insert([newBloggerData]);
-
+      
+      window.location.reload();
     if (error) {
       console.log('Error adding blogger:', error);
     } else if (data) {
@@ -69,8 +71,14 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
         username: '',
         password: ''
       });
+      
+      // Show success message upon successful addition
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'New blogger added successfully!',
+      });
     }
-    window.location.reload();
   };
 
   const handleLogout = () => {
@@ -83,16 +91,35 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
   };
 
   const handleDeleteBloggers = async (id: number) => {
-    const { error } = await supabase
-      .from('bloggers')
-      .delete()
-      .eq('id', id);
+    // Ask for confirmation before deleting
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this blogger!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { error } = await supabase
+          .from('bloggers')
+          .delete()
+          .eq('id', id);
 
-    if (error) {
-      console.log('Error deleting bloggers:', error);
-    } else {
-      setBloggers((prevBloggers) => prevBloggers.filter(bloggers => bloggers.id !== id));
-    }
+        if (error) {
+          console.log('Error deleting bloggers:', error);
+        } else {
+          setBloggers((prevBloggers) => prevBloggers.filter(bloggers => bloggers.id !== id));
+          // Show success message upon successful deletion
+          Swal.fire(
+            'Deleted!',
+            'The blogger has been deleted.',
+            'success'
+          );
+        }
+      }
+    });
   };
 
   return (

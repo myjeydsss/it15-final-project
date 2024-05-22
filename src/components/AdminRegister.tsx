@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { supabase } from '../supabaseClient';
 import { Link } from 'react-router-dom';
+import { Navbar, Container } from 'react-bootstrap';
 
 interface FormData {
   fullname: string;
@@ -51,6 +52,17 @@ const AdminRegister: React.FC = () => {
   }
 
   return (
+    <>
+    <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+        <Container>
+          <Navbar.Brand href="/Home">Welcome!</Navbar.Brand>
+          <Navbar.Toggle aria-controls="basic-navbar-nav" />
+          <Navbar.Collapse id="basic-navbar-nav">
+            
+          </Navbar.Collapse>
+        </Container>
+      </Navbar>
+  
     <div className="container mt-5">
       <div className="row justify-content-center">
         <div className="col-md-6">
@@ -97,6 +109,7 @@ const AdminRegister: React.FC = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };
 

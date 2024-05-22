@@ -1,7 +1,8 @@
-import  { useState } from 'react';
+import { useState } from 'react';
 import { supabase } from '../supabaseClient';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, NavDropdown, Form, Button, Card } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
@@ -11,6 +12,8 @@ const RegisterUser = () => {
     username: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -37,11 +40,20 @@ const RegisterUser = () => {
         throw error;
       }
 
-      alert('Registration successful!');
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration Successful',
+        text: 'You have registered successfully!',
+      }).then(() => {
+        navigate('/LoginUser');
+      });
     } catch (error) {
-      alert(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Registration Failed',
+        text: "Registration Failed",
+      });
     }
-    window.location.reload();
   };
 
   return (

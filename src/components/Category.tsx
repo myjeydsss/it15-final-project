@@ -5,6 +5,8 @@ import { Container, Nav, NavLink, Navbar, Button, Modal, Form } from 'react-boot
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
+
 
 interface Category {
   category_id: number;
@@ -14,9 +16,7 @@ interface Category {
 interface Token {
   user: {
     email: string;
-    // Add other properties if needed
   };
-  // Add other token properties if needed
 }
 
 interface CategoryProps {
@@ -44,52 +44,46 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
       setCategories(data);
     }
   };
-
   const handleAddCategory = async () => {
     if (newCategoryName.trim() === '') {
-      alert('Category name cannot be empty');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Category name cannot be empty',
+      });
       return;
     }
-
+  
     const { data, error } = await supabase
       .from('category')
       .insert([{ category_name: newCategoryName }]);
-
+  
     if (error) {
       console.log('Error adding category:', error);
     } else if (data) {
       setCategories((prevCategories) => [...prevCategories, ...data]);
       setNewCategoryName('');
       fetchCategories(); // Fetch categories again to ensure data is up-to-date
+      Swal.fire({
+        icon: 'success',
+        title: 'Added',
+        text: 'Category added successfully',
+      });
     }
     window.location.reload();
-
   };
-
-  const handleDeleteCategory = async (category_id: number) => {
-    const { error } = await supabase
-      .from('category')
-      .delete()
-      .eq('category_id', category_id);
-
-    if (error) {
-      console.log('Error deleting category:', error);
-    } else {
-      setCategories((prevCategories) => prevCategories.filter(category => category.category_id !== category_id));
-    }
-  };
-
+  
   const handleEditCategory = async () => {
     if (editCategoryName.trim() === '' || selectedCategoryId === null) {
       alert('Category name cannot be empty');
       return;
     }
-
+  
     const { data, error } = await supabase
       .from('category')
       .update({ category_name: editCategoryName })
       .eq('category_id', selectedCategoryId);
-
+  
     if (error) {
       console.log('Error updating category:', error);
     } else if (data) {
@@ -101,10 +95,46 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
       setShowEditModal(false);
       setEditCategoryName('');
       setSelectedCategoryId(null);
+      Swal.fire({
+        icon: 'success',
+        title: 'Updated',
+        text: 'Category updated successfully',
+      });
     }
     window.location.reload();
   };
-
+  
+  const handleDeleteCategory = async (category_id: number) => {
+    // Show confirmation dialog
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You will not be able to recover this category!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Yes, delete it!'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const { error } = await supabase
+          .from('category')
+          .delete()
+          .eq('category_id', category_id);
+  
+        if (error) {
+          console.log('Error deleting category:', error);
+        } else {
+          setCategories((prevCategories) => prevCategories.filter(category => category.category_id !== category_id));
+          Swal.fire({
+            icon: 'success',
+            title: 'Deleted',
+            text: 'Category deleted successfully',
+          });
+        }
+      }
+    });
+  };
+  
   const handleLogout = () => {
     // Clear the token from session storage
     sessionStorage.removeItem('token');

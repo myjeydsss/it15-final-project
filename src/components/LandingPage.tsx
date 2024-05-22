@@ -65,7 +65,7 @@ const LandingPage: React.FC = () => {
             <span className="text2">Blogify360</span>
           </h2>
           <p className="pDiscover">Discover and connect with amazing content creators.</p>
-          <a href="/SignIn">
+          <a href="/LoginUser">
             <span className="button1">Get Started</span>
           </a>
         </div>

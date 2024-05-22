@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { supabase } from '../supabaseClient';
 import { Form, Button, Container, Card, Nav, Navbar } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 interface User {
   id: number;
@@ -66,51 +67,63 @@ const EditProfile = () => {
   const handleUpdate = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
     let imageUrl = formData.profile_image;
-  
+
     if (file) {
       const { data, error } = await supabase.storage
         .from('profile_image')
         .upload(`${formData.id}/${file.name}`, file);
-  
+
       if (error) {
         console.error('Error uploading image:', error.message); // Log the error to console
         alert('Error uploading image');
         return;
       }
-  
+
       imageUrl = data?.path;
     }
-  
-    try {
-      const { error } = await supabase
-        .from('bloggers')
-        .update({
-          firstname: formData.firstname,
-          lastname: formData.lastname,
-          email: formData.email,
-          username: formData.username,
-          password: formData.password,
-          profile_image: imageUrl,
-        })
-        .eq('id', formData.id);
-  
-      if (error) {
-        throw error;
+
+    Swal.fire({
+      title: "Do you want to save the changes?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "Save",
+      denyButtonText: `Don't save`
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const { error } = await supabase
+            .from('bloggers')
+            .update({
+              firstname: formData.firstname,
+              lastname: formData.lastname,
+              email: formData.email,
+              username: formData.username,
+              password: formData.password,
+              profile_image: imageUrl,
+            })
+            .eq('id', formData.id);
+
+          if (error) {
+            throw error;
+          }
+
+          const updatedUser = { ...formData, profile_image: imageUrl };
+          localStorage.setItem('user', JSON.stringify(updatedUser));
+          Swal.fire("Saved!", "", "success").then(() => {
+            navigate('/BloggerProfile');
+          });
+
+          setFile(null);
+          setImagePreview(null);
+        } catch (error) {
+          console.error('Error updating profile:', error); // Log the error to console
+          Swal.fire("Error", "An error occurred while updating your profile.", "error");
+        }
+      } else if (result.isDenied) {
+        Swal.fire("Changes are not saved", "", "info");
       }
-  
-      const updatedUser = { ...formData, profile_image: imageUrl };
-      localStorage.setItem('user', JSON.stringify(updatedUser));
-      alert('Profile updated successfully!');
-      navigate('/BloggerProfile');
-  
-      setFile(null);
-      setImagePreview(null);
-    } catch (error) {
-      console.error('Error updating profile:', error); // Log the error to console
-      alert(error);
-    }
+    });
   };
-  
 
   const handleLogout = () => {
     localStorage.removeItem('user');

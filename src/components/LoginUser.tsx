@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../supabaseClient'; 
 import { Link, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, NavDropdown, Form, Button, Card } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import "bootstrap/dist/css/bootstrap.min.css";
 
 const LoginUser = () => {
@@ -36,13 +37,27 @@ const LoginUser = () => {
       if (data.length > 0) {
         const user = data[0];
         localStorage.setItem('user', JSON.stringify(user));
-        alert('Login successful!');
-        navigate('/BloggerDashboard');
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Login successful!",
+          showConfirmButton: false,
+          timer: 1500
+        }).then(() => {
+          navigate('/BloggerDashboard');
+        });
       } else {
-        alert('Invalid username or password');
+        Swal.fire({
+          icon: "error",
+          title: "Invalid username or password",
+        });
       }
     } catch (error) {
-      alert(error);
+      Swal.fire({
+        icon: "error",
+        title: "An error occurred",
+        text: "Login Failed",
+      });
     }
   };
 

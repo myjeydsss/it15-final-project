@@ -56,44 +56,10 @@ const AdminLogin: React.FC<Props> = ({ setToken }) => {
     <>
    <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
-          <Navbar.Brand href="#">Welcome!</Navbar.Brand>
+          <Navbar.Brand href="/Home">Welcome!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
-            <Nav className="ms-auto">
-            <NavLink
-                  to="/AdminDashboard"
-                  className={`nav-link mx-2 ${
-                    location.pathname === "/AdminDashboard" ? "active" : ""
-                  }`}
-                >
-                  Dashboard
-                </NavLink>
-            <NavLink
-                  to="/Bloggers"
-                  className={`nav-link mx-2 ${
-                    location.pathname === "/Bloggers" ? "active" : ""
-                  }`}
-                >
-                  Bloggers
-                </NavLink>
-                <NavLink
-                  to="/Posts"
-                  className={`nav-link mx-2 ${
-                    location.pathname === "/Posts" ? "active" : ""
-                  }`}
-                >
-                  Posts
-                </NavLink>
-                <NavLink
-                  to="/Category"
-                  className={`nav-link mx-2 ${
-                    location.pathname === "/Category" ? "active" : ""
-                  }`}
-                >
-                  Category
-                </NavLink>
-              
-            </Nav>
+            
           </Navbar.Collapse>
         </Container>
       </Navbar>
