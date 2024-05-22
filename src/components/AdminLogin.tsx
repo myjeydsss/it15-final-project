@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
-import { Link, NavLink, useNavigate } from 'react-router-dom';
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Link, useNavigate } from 'react-router-dom';
+import { Navbar, Container } from 'react-bootstrap';
 
 import { supabase } from '../supabaseClient';
 
