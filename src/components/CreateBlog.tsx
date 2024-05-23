@@ -134,10 +134,16 @@ const CreateBlog = () => {
 
   return (
     <>
-      <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+     <Navbar bg="light" expand="lg" variant="light" className="p-3">
         <Container>
           <Navbar.Brand href="#">
-            Welcome{user ? `, ${user.firstname} ${user.lastname}` : "!"}
+            <img
+              src="./images/logo-dark.svg"
+              alt="Logo" 
+              width="100" 
+              height="30" 
+              className="d-inline-block align-top" 
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
@@ -145,23 +151,21 @@ const CreateBlog = () => {
               <NavLink
                 to="/BloggerDashboard"
                 className={`nav-link mx-2 ${
-                  location.pathname === "/BloggerDashboard" ? "active" : ""
+                  location.pathname === '/BloggerDashboard' ? 'active' : ''
                 }`}
               >
                 Dashboard
               </NavLink>
               <NavLink
                 to="/CreateBlog"
-                className={`nav-link mx-2 ${
-                  location.pathname === "/CreateBlog" ? "active" : ""
-                }`}
+                className={`nav-link mx-2 ${location.pathname === '/CreateBlog' ? 'active' : ''}`}
               >
                 Create Blog
               </NavLink>
               <NavLink
                 to="/BloggerProfile"
                 className={`nav-link mx-2 ${
-                  location.pathname === "/BloggerProfile" ? "active" : ""
+                  location.pathname === '/BloggerProfile' ? 'active' : ''
                 }`}
               >
                 Profile

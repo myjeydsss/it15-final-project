@@ -24,7 +24,7 @@ interface CategoryProps {
   setToken: React.Dispatch<React.SetStateAction<Token | null>>;
 }
 
-const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
+const Category: React.FC<CategoryProps> = ({ setToken }) => {
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCategoryName, setNewCategoryName] = useState('');
   const [showEditModal, setShowEditModal] = useState(false);
@@ -154,7 +154,7 @@ const Category: React.FC<CategoryProps> = ({ token, setToken }) => {
     <>
       <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
-          <Navbar.Brand href="#">Welcome, {token.user.email}!</Navbar.Brand>
+        <Navbar.Brand href="#">Welcome to Blogify360!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">

@@ -4,7 +4,7 @@ import { Container, Card, Button, Navbar } from 'react-bootstrap';
 import { supabase } from '../supabaseClient';
 import { useNavigate } from 'react-router-dom';
 import "bootstrap/dist/css/bootstrap.min.css";
-import './css/blogDetails.css';  // Create and import a CSS file for styling
+import './css/blogDetails.css';  
 
 interface Blog {
   category: any;
@@ -50,14 +50,8 @@ const BlogDetails: React.FC = () => {
     <> <header>
     <Navbar bg="light" expand="lg" variant="light" className="p-3">
       <Container>
-      <Navbar.Brand href="#">
-    <img
-      src="./images/logo-dark.svg"
-      alt="Logo" 
-      width="100" 
-      height="30" 
-      className="d-inline-block align-top" 
-    />
+      <Navbar.Brand href="#">Welcome to Blogify360!
+    
   </Navbar.Brand>
         
       </Container>

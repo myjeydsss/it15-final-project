@@ -16,6 +16,8 @@ interface Blog {
   content: string;
   blog_image: string;
   bloggers_id: string;
+  firstname: string;
+  lastname: string;
   category: string;
   date_created: number;
 }
@@ -25,7 +27,7 @@ interface PostsProps {
   setToken: React.Dispatch<React.SetStateAction<Token | null>>;
 }
 
-const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
+const Posts: React.FC<PostsProps> = ({ setToken }) => {
   const [blogs, setBlogs] = useState<Blog[]>([]);
   const navigate = useNavigate();
 
@@ -37,7 +39,16 @@ const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
     try {
       const { data, error } = await supabase
         .from('blogs')
-        .select('*');
+        .select(`
+          blog_id,
+          title,
+          content,
+          blog_image,
+          bloggers_id,
+          category,
+          date_created,
+          bloggers ( firstname, lastname )
+        `);
 
       if (error) {
         console.error('Error fetching blogs:', error);
@@ -47,7 +58,12 @@ const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
           text: 'Error fetching blogs',
         });
       } else {
-        setBlogs(data);
+        const formattedData = data.map((blog: any) => ({
+          ...blog,
+          firstname: blog.bloggers.firstname,
+          lastname: blog.bloggers.lastname,
+        }));
+        setBlogs(formattedData);
       }
     } catch (error) {
       console.error('Error fetching blogs:', error);
@@ -117,7 +133,7 @@ const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
     <>
       <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
-          <Navbar.Brand href="#">Welcome, {token.user.email}!</Navbar.Brand>
+        <Navbar.Brand href="#">Welcome to Blogify360!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -165,6 +181,7 @@ const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
           <thead>
             <tr>
               <th>Title</th>
+              <th>Author</th>
               <th>Content</th>
               <th>Image</th>
               <th>Category</th>
@@ -176,12 +193,13 @@ const Posts: React.FC<PostsProps> = ({ token, setToken }) => {
             {blogs.map((blog) => (
               <tr key={blog.blog_id}>
                 <td>{blog.title}</td>
+                <td>{blog.firstname} {blog.lastname}</td>
                 <td>{blog.content}</td>
                 <td>
                   <img src={`https://fnuxlkuyfgyjiomkzksy.supabase.co/storage/v1/object/public/blog_image/${blog.blog_image}`} alt={blog.title} style={{ maxWidth: '100px', maxHeight: '100px' }} />
                 </td>
                 <td>{blog.category}</td>
-                <td>{blog.date_created}</td>
+                <td>{new Date(blog.date_created).toLocaleDateString()}</td>
                 <td>
                   <Button variant="danger" onClick={() => handleDelete(blog.blog_id)}>Delete</Button>
                 </td>

@@ -27,7 +27,7 @@ interface BloggersProps {
   setToken: React.Dispatch<React.SetStateAction<Token | null>>;
 }
 
-const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
+const Bloggers: React.FC<BloggersProps> = ({ setToken }) => {
 
   const [bloggers, setBloggers] = useState<Bloggers[]>([]);
   const [showAddModal, setShowAddModal] = useState(false);
@@ -72,7 +72,6 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
         password: ''
       });
       
-      // Show success message upon successful addition
       Swal.fire({
         icon: 'success',
         title: 'Success',
@@ -82,16 +81,12 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
   };
 
   const handleLogout = () => {
-    // Clear the token from session storage
     sessionStorage.removeItem('token');
-    // Clear the token state
     setToken(null);
-    // Redirect to the admin login page
     navigate('/LoginAdmin');
   };
 
   const handleDeleteBloggers = async (id: number) => {
-    // Ask for confirmation before deleting
     Swal.fire({
       title: 'Are you sure?',
       text: 'You will not be able to recover this blogger!',
@@ -111,7 +106,6 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
           console.log('Error deleting bloggers:', error);
         } else {
           setBloggers((prevBloggers) => prevBloggers.filter(bloggers => bloggers.id !== id));
-          // Show success message upon successful deletion
           Swal.fire(
             'Deleted!',
             'The blogger has been deleted.',
@@ -126,7 +120,7 @@ const Bloggers: React.FC<BloggersProps> = ({ token, setToken }) => {
     <>
       <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
-          <Navbar.Brand href="#">Welcome, {token.user.email}!</Navbar.Brand>
+        <Navbar.Brand href="#">Welcome to Blogify360!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">

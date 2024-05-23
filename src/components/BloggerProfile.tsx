@@ -4,6 +4,7 @@ import { supabase } from '../supabaseClient';
 import { Button, Container, Card, Nav, NavLink, Navbar } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import './css/BloggerProfile.css';
+
 import Swal from "sweetalert2";
 
 
@@ -98,16 +99,20 @@ const BloggerProfile = () => {
 
   return (
     <>
-      {/* Navigation bar */}
-      <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+       <Navbar bg="light" expand="lg" variant="light" className="p-3">
         <Container>
           <Navbar.Brand href="#">
-            Welcome{user ? `, ${user.firstname} ${user.lastname}` : '!'}
+            <img
+              src="./images/logo-dark.svg"
+              alt="Logo" 
+              width="100" 
+              height="30" 
+              className="d-inline-block align-top" 
+            />
           </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
-              {/* Navigation links */}
               <NavLink
                 href="/BloggerDashboard"
                 className={`nav-link mx-2 ${
@@ -130,7 +135,6 @@ const BloggerProfile = () => {
               >
                 Profile
               </NavLink>
-              {/* Logout button */}
               <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
             </Nav>
           </Navbar.Collapse>
@@ -141,21 +145,17 @@ const BloggerProfile = () => {
         <Card className="p-4">
           <Card.Body>
             <h5 className="card-title">Profile</h5>
-            {/* Check if user data exists */}
             {user ? (
               <div>
-                {/* Display profile image in circular format */}
                 {user.profile_image && (
                   <div className="avatar-container">
                     <img src={CDNURL + user.profile_image} alt="Profile" className="avatar-image" />
                   </div>
                 )}
-                {/* Display user information */}
                 <p><strong>Firstname:</strong> {user.firstname}</p>
                 <p><strong>Lastname:</strong> {user.lastname}</p>
                 <p><strong>Email:</strong> {user.email}</p>
                 <p><strong>Username:</strong> {user.username}</p>
-                {/* Edit Profile button */}
                 <Button variant="primary" onClick={() => navigate('/EditProfile')}>
                   Edit Profile
                 </Button>
@@ -163,7 +163,6 @@ const BloggerProfile = () => {
             ) : (
               <p>Loading...</p>
             )}
-            {/* Delete Account button */}
             <Button variant="danger" className="mt-3" onClick={showDeleteAlert}>
               Delete Account
             </Button>

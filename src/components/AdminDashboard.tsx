@@ -39,7 +39,7 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ token, setToken }) => {
     <>
       <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
         <Container>
-          <Navbar.Brand href="#">Welcome, {token.user.email}!</Navbar.Brand>
+          <Navbar.Brand href="#">Welcome to Blogify360!</Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -87,7 +87,6 @@ const AdminDashboard: React.FC<AdminDashboardProps> = ({ token, setToken }) => {
             <div className="col-md-12">
               <div className="block text-center">
                 <h1 className="text-capitalize mb-5 text-lg">Dashboard</h1>
-                <h1 className="text-capitalize mb-5 text-lg">Welcome, {token.user.email}!</h1>
               </div>
             </div>
           </div>

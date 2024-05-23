@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Navbar, Container, Nav, Table, NavDropdown, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown, Button } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { supabase } from '../supabaseClient';  // Make sure to adjust the import path based on your project structure
+
 
 interface Blog {
   category: any;
@@ -101,40 +102,60 @@ const Features: React.FC = () => {
         </Navbar>
       </header>
 
-      <div className="container mt-4">
-        <Container className="mt-5">
-          <Table striped bordered hover>
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Content</th>
-                <th>Image</th>
-                <th>Category</th>
-                <th>Date Created</th>
-                <th>Action</th>
-              </tr>
-            </thead>
-            <tbody>
-              {blogs.map((blog) => (
-                <tr key={blog.blog_id}>
-                  <td>{blog.title}</td>
-                  <td>{blog.content}</td>
-                  <td>
-                    <img src={`https://fnuxlkuyfgyjiomkzksy.supabase.co/storage/v1/object/public/blog_image/${blog.blog_image}`} alt={blog.title} style={{ maxWidth: '100px', maxHeight: '100px' }} />
-                  </td>
-                  <td>{blog.category.category_name}</td>
-                  <td>{new Date(blog.date_created).toLocaleDateString()}</td>
-                  <td>
-                    <Button variant="primary" onClick={() => handleViewBlog(blog.blog_id)}>
-                      View This Blog
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
+      {blogs.length > 0 ? (
+        <section className='blogger-section'>
+          <div className='grid-container'>
+            {blogs.map((blog) => (
+              <Container className='table-container' key={blog.blog_id} onClick={() => handleViewBlog(blog.blog_id)}>
+                                    <img  src={`https://fnuxlkuyfgyjiomkzksy.supabase.co/storage/v1/object/public/blog_image/${blog.blog_image}`} alt={blog.title} className='img-img' />
+
+                <p className='blog-title'> {blog.title} </p>
+              </Container>
+            ))}
+          </div>
+        </section>
+      ) : (
+        <Container className="no-blogs-container text-center mt-5">
+          <p>You haven't posted any blogs yet.</p>
+          <Button variant="primary" onClick={() => navigate('/CreateBlog')}>Create Your First Blog</Button>
         </Container>
-      </div>
+      )}
+
+<section className='fourthSection'>
+        <div className="svg-row">
+          <a href='https://www.facebook.com'>
+            <img src='./images/facebook-f.svg' className="svg-item" alt="Facebook" />
+          </a>
+          <a href='https://www.instagram.com'>
+            <img src='./images/instagram.svg' className="svg-item" alt="Instagram" />
+          </a>
+          <a href='https://www.facebook.com/phoebe.lerog'>
+            <img src='./images/pinterest-p.svg' className="svg-item" alt="Pinterest" />
+          </a>
+          <a href='https://www.facebook.com/phoebe.lerog'>
+            <img src='./images/x-twitter.svg' className="svg-item" alt="Twitter" />
+          </a>
+        </div>
+        <div className='link-link'>
+          <a href='/Home'>
+            <span>Home | </span>
+          </a>
+          <a href='/About'>
+            <span>About | </span>
+          </a>
+          <a href='/Contact'>
+            <span>Contact</span>
+          </a>
+        </div>
+        <div className='link-logo'>
+          <a href='/Home'>
+            <img src='./images/logo.png' className="logo" alt="Logo" />
+          </a>
+        </div>
+        <div className='footer'> 
+          <p className="reserved">2024 Blogify360 | All Rights Reserved</p>
+        </div>
+      </section>
     </>
   );
 };
