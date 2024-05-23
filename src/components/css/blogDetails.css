@@ -1,0 +1,18 @@
+.blog-details-card {
+    max-width: 600px;
+    margin: auto;
+  }
+  
+  .blog-details-card img {
+    max-height: 400px;
+    object-fit: cover;
+  }
+  
+  .blog-details-card .card-body {
+    text-align: left;
+  }
+  .logo{
+    width: 200px;
+    height: 200px;
+  }
+  

@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav } from 'react-bootstrap';
+import { Navbar, Container, Nav, Button } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
@@ -72,15 +72,15 @@ const BloggerDashboard = () => {
     <>
       <Navbar bg="light" expand="lg" variant="light" className="p-3">
         <Container>
-        <Navbar.Brand href="#">
-        <img
-          src="./images/logo-dark.svg"
-          alt="Logo" 
-          width="100" 
-          height="30" 
-          className="d-inline-block align-top" 
-        />
-      </Navbar.Brand>
+          <Navbar.Brand href="#">
+            <img
+              src="./images/logo-dark.svg"
+              alt="Logo" 
+              width="100" 
+              height="30" 
+              className="d-inline-block align-top" 
+            />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -115,25 +115,29 @@ const BloggerDashboard = () => {
         <p className='blogger-dashboard'> {user ? `${user.firstname} ${user.lastname}` : '!'} Dashboard</p>
       </Container>
       {blogs.length > 0 ? (
-      <section className='blogger-section'>
-      <div className='grid-container'>
-      {blogs.map((blog) => (
-        <Container className='table-container' onClick={() => handleViewBlog(blog.blog_id)}>
-        <img
-        src={CDNURL + blog.blog_image}
-        alt={blog.title}
-        className='img-img'
-                    />
-        <p className='blog-title'> {blog.title} </p>
-        </Container>
-        ))}
-      </div>
-      </section>
+        <section className='blogger-section'>
+          <div className='grid-container'>
+            {blogs.map((blog) => (
+              <Container className='table-container' key={blog.blog_id} onClick={() => handleViewBlog(blog.blog_id)}>
+                <img
+                  src={CDNURL + blog.blog_image}
+                  alt={blog.title}
+                  className='img-img'
+                />
+                <p className='blog-title'> {blog.title} </p>
+              </Container>
+            ))}
+          </div>
+        </section>
       ) : (
-        <p>No blogs found</p>
+        <Container className="no-blogs-container text-center mt-5">
+          <p>You haven't posted any blogs yet.</p>
+          <Button variant="primary" onClick={() => navigate('/CreateBlog')}>Create Your First Blog</Button>
+        </Container>
       )}
+      <br />
 
-<section className='fourthSection'>
+      <section className='fourthSection'>
         <div className="svg-row">
           <a href='https://www.facebook.com'>
             <img src='./images/facebook-f.svg' className="svg-item" alt="Facebook" />

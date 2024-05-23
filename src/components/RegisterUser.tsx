@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import { supabase } from '../supabaseClient';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Navbar, Container, Nav, NavDropdown, Form, Button } from 'react-bootstrap';
+import Swal from 'sweetalert2';
 import './css/registerUser.css';
-
 
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
@@ -13,6 +13,8 @@ const RegisterUser = () => {
     username: '',
     password: '',
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -39,11 +41,20 @@ const RegisterUser = () => {
         throw error;
       }
 
-      alert('Registration successful!');
+      Swal.fire({
+        icon: 'success',
+        title: 'Registration successful!',
+        text: 'You have successfully registered.',
+      }).then(() => {
+        navigate('/LoginUser');
+      });
     } catch (error) {
-      alert(error);
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: "Registration Failed",
+      });
     }
-    window.location.reload();
   };
 
   return (
@@ -51,15 +62,15 @@ const RegisterUser = () => {
       <header>
         <Navbar bg="light" expand="lg" variant="light" className="p-3">
           <Container>
-          <Navbar.Brand href="#">
-        <img
-          src="./images/logo-dark.svg"
-          alt="Logo" 
-          width="100" 
-          height="30" 
-          className="d-inline-block align-top" 
-        />
-      </Navbar.Brand>
+            <Navbar.Brand href="#">
+              <img
+                src="./images/logo-dark.svg"
+                alt="Logo" 
+                width="100" 
+                height="30" 
+                className="d-inline-block align-top" 
+              />
+            </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarNavDropdown" />
             <Navbar.Collapse id="navbarNavDropdown">
               <Nav className="ms-auto">
