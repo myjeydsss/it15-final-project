@@ -10,9 +10,17 @@ const LandingPage: React.FC = () => {
   return (
     <>
       <header>
-        <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+        <Navbar bg="light" expand="lg" variant="light" className="p-3">
           <Container>
-            <Navbar.Brand href="#">Blogify360</Navbar.Brand>
+          <Navbar.Brand href="#">
+        <img
+          src="./images/logo-dark.svg"
+          alt="Logo" 
+          width="100" 
+          height="30" 
+          className="d-inline-block align-top" 
+        />
+      </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarNavDropdown" />
             <Navbar.Collapse id="navbarNavDropdown">
               <Nav className="ms-auto">
@@ -65,7 +73,7 @@ const LandingPage: React.FC = () => {
             <span className="text2">Blogify360</span>
           </h2>
           <p className="pDiscover">Discover and connect with amazing content creators.</p>
-          <a href="/LoginUser">
+          <a href="/SignIn">
             <span className="button1">Get Started</span>
           </a>
         </div>
@@ -103,9 +111,9 @@ const LandingPage: React.FC = () => {
           <p className="paragraph3" style={{ lineHeight: '1.55' }}>
             With Blogify360 handling the backend, your blog&apos;s distinct identity takes center stage.
           </p>
-          <a href="#" className="link-free">
+          <p className="link-free">
             Try Blogify360 completely free for 14 Days -&gt;
-          </a>
+          </p>
         </div>
         <div className="div1">
           <img
@@ -134,19 +142,19 @@ const LandingPage: React.FC = () => {
     
     <section className='fourthSection'>
       <div className="svg-row">
-        <a href='https://www.facebook.com/phoebe.lerog'>
+        <a href='https://www.facebook.com/'>
         <img src='./images/facebook-f.svg' className="svg-item">
         </img>
         </a>
-        <a href='https://www.facebook.com/phoebe.lerog'>
+        <a href='https://www.instagram.com/'>
         <img src='./images/instagram.svg' className="svg-item">
         </img>
         </a>
-        <a href='https://www.facebook.com/phoebe.lerog'>
+        <a href='https://www.pinterest.ph/'>
         <img src='./images/pinterest-p.svg' className="svg-item">
         </img>
         </a>
-        <a href='https://www.facebook.com/phoebe.lerog'>
+        <a href='https://x.com/?lang=en&mx=2'>
         <img src='./images/x-twitter.svg' className="svg-item">
         </img>
         </a>

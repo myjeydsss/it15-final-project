@@ -1,9 +1,9 @@
-import { Navbar, Container, Nav, Table, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { supabase } from '../supabaseClient';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import "bootstrap/dist/css/bootstrap.min.css";
+import './css/bloogerDashboard.css';
 
 // Define a type for the user object
 interface User {
@@ -70,11 +70,17 @@ const BloggerDashboard = () => {
 
   return (
     <>
-      <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+      <Navbar bg="light" expand="lg" variant="light" className="p-3">
         <Container>
-          <Navbar.Brand href="#">
-            Welcome{user ? `, ${user.firstname} ${user.lastname}` : '!'}
-          </Navbar.Brand>
+        <Navbar.Brand href="#">
+        <img
+          src="./images/logo-dark.svg"
+          alt="Logo" 
+          width="100" 
+          height="30" 
+          className="d-inline-block align-top" 
+        />
+      </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="ms-auto">
@@ -105,50 +111,63 @@ const BloggerDashboard = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Container className="mt-5">
-        <h4>Blogger Dashboard</h4>
-        {blogs.length > 0 ? (
-          <Table striped bordered hover className="mt-3">
-            <thead>
-              <tr>
-                <th>Title</th>
-                <th>Image</th>
-                <th>Content</th>
-                <th>Date Created</th>
-                <th>Actions</th>
-              </tr>
-            </thead>
-            <tbody>
-              {blogs.map((blog) => (
-                <tr key={blog.blog_id}>
-                  <td>{blog.title}</td>
-                  <td>
-                    <img
-                      src={CDNURL + blog.blog_image}
-                      alt={blog.title}
-                      style={{ width: '100px', height: 'auto' }}
-                    />
-                  </td>
-                  <td>{blog.content}</td>
-                  <td>{blog.date_created}</td>
-
-                  <td>
-                    <Button
-                      variant="primary"
-                      onClick={() => handleViewBlog(blog.blog_id)}
-                    >
-                      <FontAwesomeIcon icon={faEye} />
-                      &nbsp; View Blog
-                    </Button>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </Table>
-        ) : (
-          <p>No blogs found</p>
-        )}
+      <Container className='blogger-container'>
+        <p className='blogger-dashboard'> {user ? `${user.firstname} ${user.lastname}` : '!'} Dashboard</p>
       </Container>
+      {blogs.length > 0 ? (
+      <section className='blogger-section'>
+      <div className='grid-container'>
+      {blogs.map((blog) => (
+        <Container className='table-container' onClick={() => handleViewBlog(blog.blog_id)}>
+        <img
+        src={CDNURL + blog.blog_image}
+        alt={blog.title}
+        className='img-img'
+                    />
+        <p className='blog-title'> {blog.title} </p>
+        </Container>
+        ))}
+      </div>
+      </section>
+      ) : (
+        <p>No blogs found</p>
+      )}
+
+<section className='fourthSection'>
+        <div className="svg-row">
+          <a href='https://www.facebook.com'>
+            <img src='./images/facebook-f.svg' className="svg-item" alt="Facebook" />
+          </a>
+          <a href='https://www.instagram.com'>
+            <img src='./images/instagram.svg' className="svg-item" alt="Instagram" />
+          </a>
+          <a href='https://www.facebook.com/phoebe.lerog'>
+            <img src='./images/pinterest-p.svg' className="svg-item" alt="Pinterest" />
+          </a>
+          <a href='https://www.facebook.com/phoebe.lerog'>
+            <img src='./images/x-twitter.svg' className="svg-item" alt="Twitter" />
+          </a>
+        </div>
+        <div className='link-link'>
+          <a href='/Home'>
+            <span>Home | </span>
+          </a>
+          <a href='/About'>
+            <span>About | </span>
+          </a>
+          <a href='/Contact'>
+            <span>Contact</span>
+          </a>
+        </div>
+        <div className='link-logo'>
+          <a href='/Home'>
+            <img src='./images/logo.png' className="logo" alt="Logo" />
+          </a>
+        </div>
+        <div className='footer'> 
+          <p className="reserved">2024 Blogify360 | All Rights Reserved</p>
+        </div>
+      </section>
     </>
   );
 };

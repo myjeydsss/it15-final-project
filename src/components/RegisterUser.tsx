@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { supabase } from '../supabaseClient';
-import { Link, useNavigate } from 'react-router-dom';
-import { Navbar, Container, Nav, NavDropdown, Form, Button, Card } from 'react-bootstrap';
-import Swal from 'sweetalert2';
+import { Link } from 'react-router-dom';
+import { Navbar, Container, Nav, NavDropdown, Form, Button } from 'react-bootstrap';
+import './css/registerUser.css';
+
 
 const RegisterUser = () => {
   const [formData, setFormData] = useState({
@@ -12,8 +13,6 @@ const RegisterUser = () => {
     username: '',
     password: '',
   });
-
-  const navigate = useNavigate();
 
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
@@ -40,28 +39,27 @@ const RegisterUser = () => {
         throw error;
       }
 
-      Swal.fire({
-        icon: 'success',
-        title: 'Registration Successful',
-        text: 'You have registered successfully!',
-      }).then(() => {
-        navigate('/LoginUser');
-      });
+      alert('Registration successful!');
     } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Registration Failed',
-        text: "Registration Failed",
-      });
+      alert(error);
     }
+    window.location.reload();
   };
 
   return (
     <>
       <header>
-        <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+        <Navbar bg="light" expand="lg" variant="light" className="p-3">
           <Container>
-            <Navbar.Brand href="#">Blogify360</Navbar.Brand>
+          <Navbar.Brand href="#">
+        <img
+          src="./images/logo-dark.svg"
+          alt="Logo" 
+          width="100" 
+          height="30" 
+          className="d-inline-block align-top" 
+        />
+      </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarNavDropdown" />
             <Navbar.Collapse id="navbarNavDropdown">
               <Nav className="ms-auto">
@@ -90,65 +88,69 @@ const RegisterUser = () => {
           </Container>
         </Navbar>
       </header>
-      <div className="container d-flex justify-content-center align-items-center mt-5">
-        <Card className="p-4">
-          <Card.Body>
-            <h5 className="card-title">Register</h5>
-            <Form onSubmit={handleSubmit}>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="Firstname"
-                  name="firstname"
-                  value={formData.firstname}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="Lastname"
-                  name="lastname"
-                  value={formData.lastname}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="email"
-                  placeholder="Email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="text"
-                  placeholder="Username"
-                  name="username"
-                  value={formData.username}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Control
-                  type="password"
-                  placeholder="Password"
-                  name="password"
-                  value={formData.password}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </Form>
-            <div className="mt-3">
-              Already have an account? <Link to={'/LoginUser'}>Login</Link>
+
+      <div className="screen-1">
+        <div className="column left-column">
+          <img src="./images/blog.png" alt="Dashboard Preview" />
+        </div>
+
+        <div className="column right-column">
+          <h1>Sign Up</h1>
+          <Form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <Form.Control
+                type="text"
+                placeholder="Firstname"
+                name="firstname"
+                value={formData.firstname}
+                onChange={handleChange}
+              />
             </div>
-          </Card.Body>
-        </Card>
+            <div className="form-group">
+              <Form.Control
+                type="text"
+                placeholder="Lastname"
+                name="lastname"
+                value={formData.lastname}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <Form.Control
+                type="email"
+                placeholder="Email"
+                name="email"
+                value={formData.email}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <Form.Control
+                type="text"
+                placeholder="Username"
+                name="username"
+                value={formData.username}
+                onChange={handleChange}
+              />
+            </div>
+            <div className="form-group">
+              <Form.Control
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={formData.password}
+                onChange={handleChange}
+              />
+            </div>
+            <Button type="submit">Register</Button>
+          </Form>
+          <div className="register-prompt">
+            <p>
+              Already have an account? 
+              <span className='login-user'><Link to='/LoginUser'> Sign In </Link></span>
+            </p>
+          </div>
+        </div>
       </div>
     </>
   );

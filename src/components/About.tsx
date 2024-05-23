@@ -7,9 +7,17 @@ const About = () => {
   return (
     <>
       <header>
-        <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+        <Navbar bg="light" expand="lg" variant="light" className="p-3">
           <Container>
-            <Navbar.Brand href="#">Blogify360</Navbar.Brand>
+          <Navbar.Brand href="#">
+        <img
+          src="./images/logo-dark.svg"
+          alt="Logo" 
+          width="100" 
+          height="30" 
+          className="d-inline-block align-top" 
+        />
+      </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarNavDropdown" />
             <Navbar.Collapse id="navbarNavDropdown">
               <Nav className="ms-auto">

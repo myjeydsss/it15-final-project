@@ -1,0 +1,94 @@
+.blogger-section{
+    margin-bottom: 50px;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); 
+    cursor: pointer;
+    transition: transform 0.2s;
+    max-width: 100%;
+    box-sizing: border-box; 
+  }
+  .table-container:hover{
+    transform: scale(1.05);
+  }
+
+.bold-text{
+    font-weight: bold;
+    font-size: xx-large;
+}
+.user-name{
+    color: #3C5B6F;
+}
+.blogger-dashboard{
+    color: #3C5B6F;
+    font-size: 2.5rem;
+    font-weight: bolder;
+}
+.blogger-container{
+    margin-top: 20px;
+}
+
+
+
+.table-container {
+    width: 300px;      
+    height: 250px;     
+    border: 1px solid rgb(255, 255, 255); 
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  .img-img{
+    margin-top: 10px;
+    width: auto;
+    height: 10rem;
+  }
+  .blog-title{
+    font-family: 'inter';
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 10px;
+    color: #3C5B6F;
+  }
+
+  .fourthSection {
+    background-color: #3C5B6F;
+    padding-top: 5rem;        
+    padding-bottom: 3rem;     
+  }
+  .svg-row {
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    display: flex;
+    justify-content: center; 
+  }
+  .svg-item {
+    width: 30px;
+    height:30px;
+    margin-right: 10px; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+  }
+  .link-link {
+    font-size: 1rem;
+    color: rgb(255, 255, 255);
+    margin-top: 1rem;
+    text-align: center;
+  }
+  .link-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+  }
+  .logo{
+    width: 200px;
+    height: 200px;
+  }
+  .reserved {
+    font-size: 1rem;  
+    color: rgb(255, 255, 255); 
+    text-align: center;       
+  }

@@ -6,9 +6,17 @@ const Contact = () => {
   return (
     <>
       <header>
-        <Navbar bg="dark" expand="lg" variant="dark" className="p-3">
+        <Navbar bg="light" expand="lg" variant="light" className="p-3">
           <Container>
-            <Navbar.Brand href="#">Blogify360</Navbar.Brand>
+          <Navbar.Brand href="#">
+        <img
+          src="./images/logo-dark.svg"
+          alt="Logo" 
+          width="100" 
+          height="30" 
+          className="d-inline-block align-top" 
+        />
+      </Navbar.Brand>
             <Navbar.Toggle aria-controls="navbarNavDropdown" />
             <Navbar.Collapse id="navbarNavDropdown">
               <Nav className="ms-auto">
@@ -59,11 +67,12 @@ const Contact = () => {
           <div className='contact-column-1'>
             <h3 className="contact-heading-3-1">Contact Us</h3>
 
-            <p className="contact-paragraph-1">
-              <img src="./images/location-dot-solid.svg" alt="Location Icon" 
-                className="contact-icon" />
-              Davao City
-            </p>
+
+      <p className="contact-paragraph-1">
+        <img src="./images/location-dot-solid.svg" alt="Location Icon" 
+          className="contact-icon" />
+        Davao City
+      </p>
 
             <p className="contact-paragraph-1">
               <img src="./images/phone-solid.svg" alt="Phone Icon" 
